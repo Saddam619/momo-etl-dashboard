@@ -31,8 +31,8 @@ momo-etl-dashboard/
 ├── tests/ # Unit test placeholders
 └── README.md
 
-yaml
-Copy code
+
+<img width="473" height="186" alt="image" src="https://github.com/user-attachments/assets/03758146-4f9d-4d6a-a3eb-1d93f5139f2f" />
 
 ---
 
@@ -42,7 +42,9 @@ Copy code
 ---
 
 ## Scrum Board
-[https://github.com/orgs/ALUdevops7/projects/2/views/1]  
+[https://github.com/orgs/ALUdevops7/projects/2/views/1]
+
+  
 <img width="1171" height="406" alt="image" src="https://github.com/user-attachments/assets/ec662e35-fbb4-436c-ab8e-65121a624348" />
 
 <img width="994" height="540" alt="image" src="https://github.com/user-attachments/assets/2a69c95b-2211-4190-a352-674f7ab3cb39" />
