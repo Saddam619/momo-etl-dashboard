@@ -3,7 +3,7 @@
 ## Team Members
 - Saddam Daahir Adam
 - Uwineza Shamilla
-- Kuzo Divine
+- Gahima Kuzo Divine
 - Nicole Mbera Umurerwa
 
 ---
