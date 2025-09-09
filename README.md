@@ -42,8 +42,14 @@ Copy code
 ---
 
 ## Scrum Board
-[Insert link to your Scrum board here]  
-Columns: **To Do | In Progress | Done**  
+[https://github.com/orgs/ALUdevops7/projects/2/views/1]  
+<img width="1171" height="406" alt="image" src="https://github.com/user-attachments/assets/ec662e35-fbb4-436c-ab8e-65121a624348" />
+
+<img width="994" height="540" alt="image" src="https://github.com/user-attachments/assets/2a69c95b-2211-4190-a352-674f7ab3cb39" />
+
+
+
+
 
 ---
 
