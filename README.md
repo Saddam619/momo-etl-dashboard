@@ -37,7 +37,7 @@ Copy code
 ---
 
 ## Architecture Diagram
-[Insert link to your Draw.io or Miro diagram here]
+![MoMo ETL Dashboard Architecture](./docs/system-architecture.drawio.png)
 
 ---
 
