@@ -22,15 +22,49 @@ This README is for Week 1, where we focus on setting up the repository, folder s
 
 ## Project Structure (Skeleton)
 momo-etl-dashboard/
-├── etl/ # Python scripts for data processing (empty for now)
+├── etl/ # Python scripts for data processing
 ├── web/ # Frontend files (HTML, CSS, JS)
 ├── data/ # Raw and processed data
 │ ├── raw/ # XML input
 │ └── processed/ # Output files
+├── database/ # SQL scripts for database setup
+│ └── database_setup.sql
+├── examples/ # JSON schemas and example transactions
+│ ├── user_schema.json
+│ ├── transaction_category_schema.json
+│ ├── transaction_schema.json
+│ ├── system_log_schema.json
+│ ├── transaction_example.json
+│ └── sql_to_json_mapping.md
 ├── scripts/ # Helper scripts
 ├── tests/ # Unit test placeholders
 └── README.md
 
+## Week 2 Contributions – JSON Modeling
+
+### JSON Schemas
+We designed JSON schemas for each main entity:
+
+- Users: `user_schema.json`
+- Transaction Categories: `transaction_category_schema.json`
+- Transactions: `transaction_schema.json`
+- System Logs: `system_log_schema.json`
+
+### Complex Transaction Example
+`transaction_example.json` demonstrates a full transaction with:
+
+- Sender & receiver user info
+- Transaction details
+- Category info
+- System logs
+
+### SQL → JSON Mapping
+`sql_to_json_mapping.md` documents:
+
+- Mapping of SQL tables to JSON fields
+- Example SQL `INSERT` statements
+- Corresponding JSON examples
+- Full nested transaction object
 
 <img width="473" height="186" alt="image" src="https://github.com/user-attachments/assets/03758146-4f9d-4d6a-a3eb-1d93f5139f2f" />
 
