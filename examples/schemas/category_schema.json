@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransactionCategory",
+  "type": "object",
+  "properties": {
+    "category_id": { "type": "integer" },
+    "code": { "type": "string", "description": "Short code e.g., TRANSFER, PAYMENT" },
+    "name": { "type": "string" },
+    "description": { "type": ["string", "null"] }
+  },
+  "required": ["category_id", "code", "name"]
+}
