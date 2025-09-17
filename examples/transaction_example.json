@@ -1,0 +1,70 @@
+{
+  "transaction_id": 1001,
+  "transaction_date": "2025-09-05T18:45:00Z",
+  "amount": 250.75,
+  "currency": "USD",
+  "fee": 2.50,
+  "balance_after": 1200.00,
+  "service_center": "MTN MoMo",
+  "sms_date_long": 1693946700000,
+  "raw_message": "You have received $250.75 from John Doe. Balance: $1200.",
+  "created_at": "2025-09-05T18:45:10Z",
+  "category": {
+    "category_id": 1,
+    "category_name": "Deposit",
+    "description": "Money deposited into account"
+  },
+  "users": [
+    {
+      "txn_user_id": 5001,
+      "user_id": 2001,
+      "role": "sender",
+      "user_details": {
+        "phone_number": "+252611234567",
+        "full_name": "John Doe",
+        "user_type": "individual",
+        "account_number": "AC12345",
+        "created_at": "2023-02-15T09:30:00Z"
+      }
+    },
+    {
+      "txn_user_id": 5002,
+      "user_id": 2002,
+      "role": "receiver",
+      "user_details": {
+        "phone_number": "+252633456789",
+        "full_name": "Jane Smith",
+        "user_type": "individual",
+        "account_number": "AC67890",
+        "created_at": "2023-05-20T11:00:00Z"
+      }
+    }
+  ],
+  "logs": [
+    {
+      "log_id": 9001,
+      "event_date": "2025-09-05T18:45:05Z",
+      "event_type": "Transaction Created",
+      "message": "Transaction recorded in system",
+      "service_center": "MTN MoMo",
+      "created_at": "2025-09-05T18:45:06Z"
+    },
+    {
+      "log_id": 9002,
+      "event_date": "2025-09-05T18:45:08Z",
+      "event_type": "SMS Sent",
+      "message": "Confirmation SMS sent to receiver",
+      "service_center": "MTN MoMo",
+      "created_at": "2025-09-05T18:45:09Z"
+    }
+  ],
+  "sms": {
+    "sms_id": 3001,
+    "protocol": "GSM",
+    "address": "+252611234567",
+    "date": 1693946700000,
+    "readable_date": "2025-09-05 18:45:00",
+    "body": "You have received $250.75 from John Doe. Balance: $1200.",
+    "service_center": "MTN MoMo"
+  }
+}

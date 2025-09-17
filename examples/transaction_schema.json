@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Transaction",
+  "type": "object",
+  "properties": {
+    "transaction_id": { "type": "integer" },
+    "transaction_date": { "type": "string", "format": "date-time" },
+    "amount": { "type": "number" },
+    "currency": { "type": "string", "maxLength": 10 },
+    "category_id": { "type": "integer" },
+    "fee": { "type": "number" },
+    "balance_after": { "type": "number" },
+    "service_center": { "type": "string", "maxLength": 30 },
+    "sms_date_long": { "type": "integer" },
+    "raw_message": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "required": ["transaction_id", "transaction_date", "amount", "currency", "category_id"]
+}
