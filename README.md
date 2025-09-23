@@ -25,6 +25,22 @@ This README is for Week 1, where we focus on setting up the repository, folder s
 
 
 ## Week 2 Contributions – JSON Modeling
+## ENTITY RELATIONSHIP DIAGRAM ERD
+While parsing the sample XML MOMO file provided to design our Entity Relationship Diagram (ERD), the following key entities: Transaction, User, TransactionCategory, TransactionUser, SystemLog, and SMS, were identified.
+• Transaction: Core entity containing attributes like transaction date, amount, currency, category (foreign key), transaction fee, balance, and timestamp.
+User: Includes id, first and last names, phone number, and usertype (e.g., MTN agents, merchants).
+TransactionCategory: Categorizes transactions into deposit, withdrawal, payment, or transfer; consists of id, category name, and description.
+TransactionUser: Addresses many-to-many relationships between users and transactions, identifying user roles (sender or receiver).
+SystemLog: Tracks events related to transactions, with attributes including event type, transaction_id, date, and message for auditing complaints.
+ SMS: Entity for SMS messages related to transactions, capturing metadata such as protocol, address, date, and service center.
+Relationships:
+Transaction ↔ User: Many-to-Many via TransactionUser.
+TransactionCategory → Transaction: One-to-Many (one category can be involved in many transactions).
+Transaction → SystemLog: One-to-Many (one transaction can have multiple log events such as parsed, validated, flagged, completed, etc.).
+User → TransactionUser: One-to-Many (one user can be involved in many transactions as either sender or receiver).
+SMS → Transaction: Can be One-to-Many or One-to-One, depending on SMS content and transaction communication. Especially, if the SMS is a summary of all the transactions made or a single sms can be linked to a single transaction.
+
+<img width="905" height="605" alt="image" src="https://github.com/user-attachments/assets/0d0b4dee-885b-48fb-a658-2b71b63b30ae" />
 
 ### JSON Schemas
 We designed JSON schemas for each main entity:
@@ -75,4 +91,5 @@ We designed JSON schemas for each main entity:
 
 ## Notes
 - Week 1 focus: repository setup, folder organization, team collaboration, and task planning.
+
 
