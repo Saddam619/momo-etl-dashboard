@@ -22,23 +22,26 @@ This README is for Week 1, where we focus on setting up the repository, folder s
 
 ## Project Structure (Skeleton)
 momo-etl-dashboard/
-├── etl/ # Python scripts for data processing
-├── web/ # Frontend files (HTML, CSS, JS)
-├── data/ # Raw and processed data
-│ ├── raw/ # XML input
-│ └── processed/ # Output files
-├── database/ # SQL scripts for database setup
-│ └── database_setup.sql
-├── examples/ # JSON schemas and example transactions
-│ ├── user_schema.json
-│ ├── transaction_category_schema.json
-│ ├── transaction_schema.json
-│ ├── system_log_schema.json
-│ ├── transaction_example.json
-│ └── sql_to_json_mapping.md
-├── scripts/ # Helper scripts
-├── tests/ # Unit test placeholders
+├── etl/                 # Python scripts for ETL processing
+├── web/                 # Frontend files (HTML, CSS, JS)
+├── data/                # Input & output data
+│   ├── raw/             # Raw XML input files
+│   └── processed/       # Processed JSON or CSV output
+├── database/            # SQL scripts for database setup
+│   └── database_setup.sql
+├── examples/            # JSON schemas & examples
+│   ├── user_schema.json
+│   ├── transaction_category_schema.json
+│   ├── transaction_schema.json
+│   ├── system_log_schema.json
+│   ├── transaction_example.json
+│   └── sql_to_json_mapping.md
+├── scripts/             # Helper/utility scripts
+├── tests/               # Unit tests
+├── docs/                # Documentation & diagrams
+│   └── system-architecture.drawio.png
 └── README.md
+
 
 ## Week 2 Contributions – JSON Modeling
 
