@@ -1,4 +1,4 @@
-# Team: MoMo Masters
+*******# Team: MoMo Masters
 
 ## Team Members
 - Saddam Daahir Adam
@@ -20,27 +20,8 @@ This README is for Week 1, where we focus on setting up the repository, folder s
 
 ---
 
-## Project Structure (Skeleton)
-momo-etl-dashboard/
-├── etl/                 # Python scripts for ETL processing
-├── web/                 # Frontend files (HTML, CSS, JS)
-├── data/                # Input & output data
-│   ├── raw/             # Raw XML input files
-│   └── processed/       # Processed JSON or CSV output
-├── database/            # SQL scripts for database setup
-│   └── database_setup.sql
-├── examples/            # JSON schemas & examples
-│   ├── user_schema.json
-│   ├── transaction_category_schema.json
-│   ├── transaction_schema.json
-│   ├── system_log_schema.json
-│   ├── transaction_example.json
-│   └── sql_to_json_mapping.md
-├── scripts/             # Helper/utility scripts
-├── tests/               # Unit tests
-├── docs/                # Documentation & diagrams
-│   └── system-architecture.drawio.png
-└── README.md
+<img width="661" height="529" alt="image" src="https://github.com/user-attachments/assets/cd3f5159-9913-417e-aadd-7b3c845c9a93" />
+
 
 
 ## Week 2 Contributions – JSON Modeling
@@ -94,3 +75,4 @@ We designed JSON schemas for each main entity:
 
 ## Notes
 - Week 1 focus: repository setup, folder organization, team collaboration, and task planning.
+
