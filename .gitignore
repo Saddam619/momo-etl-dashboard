@@ -10,6 +10,7 @@ data/logs/*
 !data/logs/.gitkeep
 data/dead_letter/*
 !data/dead_letter/.gitkeep
+/dsa/parsed_data.json
 
 # Python/cache/editor
 __pycache__/
