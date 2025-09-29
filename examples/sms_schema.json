@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SMS",
+  "type": "object",
+  "properties": {
+    "sms_id": { "type": "integer" },
+    "protocol": { "type": "string", "maxLength": 10 },
+    "address": { "type": "string", "maxLength": 30 },
+    "date": { "type": "integer" },
+    "readable_date": { "type": "string", "maxLength": 50 },
+    "body": { "type": "string" },
+    "service_center": { "type": "string", "maxLength": 30 }
+  },
+  "required": ["sms_id", "protocol", "address", "date", "body"]
+}
