@@ -11,8 +11,8 @@ from pathlib import Path
 from datetime import datetime
 
 # Paths
-INPUT_XML = Path("modified_sms_v2.xml")
-OUT_JSON = Path("/dsa/parsed_data.json")
+INPUT_XML = Path("data/raw/modified_sms_v2.xml")
+OUT_JSON = Path("dsa/parsed_data.json")
 
 # Regex patterns
 AMOUNT_RE = re.compile(r'(\d{1,3}(?:[,\s]\d{3})*|\d+)\s*RWF', re.IGNORECASE)
