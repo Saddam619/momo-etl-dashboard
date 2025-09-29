@@ -1,20 +1,15 @@
+
 #!/usr/bin/env python3
 """
-REST API for parsed MoMo SMS transactions with Basic Authentication
+REST API for parsed MoMo SMS transactions
 """
 
 import json
 import urllib.parse
 from pathlib import Path
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import os
-import base64
 
 DATA_FILE = Path("dsa/parsed_data.json")
-
-# Load credentials from environment variables (fallback defaults)
-API_USER = os.getenv("API_USER", "admin")
-API_PASS = os.getenv("API_PASS", "password")
 
 # Load JSON into memory
 def load_data():
@@ -37,43 +32,13 @@ def get_transaction(trans_id):
             return tx
     return None
 
-# --- Authentication helpers ---
-def check_basic_auth(header_value: str) -> bool:
-    """
-    Returns True if header_value contains valid Basic credentials.
-    """
-    if not header_value or not header_value.startswith("Basic "):
-        return False
-    try:
-        b64 = header_value.split(" ", 1)[1]
-        decoded = base64.b64decode(b64).decode("utf-8")
-        user, pwd = decoded.split(":", 1)
-        return user == API_USER and pwd == API_PASS
-    except Exception:
-        return False
-
-def send_unauthorized(handler):
-    handler.send_response(401)
-    handler.send_header("WWW-Authenticate", 'Basic realm="MoMo API"')
-    handler.send_header("Content-Type", "application/json")
-    handler.end_headers()
-    handler.wfile.write(b'{"error":"Unauthorized"}')
-
-# --- HTTP Handler ---
 class MoMoAPIHandler(BaseHTTPRequestHandler):
     def _set_headers(self, status=200):
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.end_headers()
 
-    # Authorization check
-    def is_authorized(self):
-        return check_basic_auth(self.headers.get("Authorization"))
-
     def do_GET(self):
-        if not self.is_authorized():
-            return send_unauthorized(self)
-
         parsed_path = urllib.parse.urlparse(self.path)
         parts = parsed_path.path.strip("/").split("/")
 
@@ -97,9 +62,6 @@ class MoMoAPIHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"error": "Invalid endpoint"}).encode())
 
     def do_POST(self):
-        if not self.is_authorized():
-            return send_unauthorized(self)
-
         if self.path == "/transactions":
             content_length = int(self.headers.get("Content-Length", 0))
             body = self.rfile.read(content_length).decode()
@@ -119,9 +81,6 @@ class MoMoAPIHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"error": "Invalid endpoint"}).encode())
 
     def do_PUT(self):
-        if not self.is_authorized():
-            return send_unauthorized(self)
-
         parts = self.path.strip("/").split("/")
         if len(parts) == 2 and parts[0] == "transactions":
             tx_id = parts[1]
@@ -145,9 +104,6 @@ class MoMoAPIHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"error": "Invalid endpoint"}).encode())
 
     def do_DELETE(self):
-        if not self.is_authorized():
-            return send_unauthorized(self)
-
         parts = self.path.strip("/").split("/")
         if len(parts) == 2 and parts[0] == "transactions":
             tx_id = parts[1]
@@ -166,7 +122,6 @@ class MoMoAPIHandler(BaseHTTPRequestHandler):
             self._set_headers(404)
             self.wfile.write(json.dumps({"error": "Invalid endpoint"}).encode())
 
-# --- Run server ---
 def run(port=8000):
     server_address = ("", port)
     httpd = HTTPServer(server_address, MoMoAPIHandler)
