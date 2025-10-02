@@ -1,11 +1,11 @@
-
 #!/usr/bin/env python3
 """
-REST API for parsed MoMo SMS transactions
+REST API for parsed MoMo SMS transactions with Basic Auth
 """
 
 import json
 import urllib.parse
+import base64
 from pathlib import Path
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -33,22 +33,41 @@ def get_transaction(trans_id):
     return None
 
 class MoMoAPIHandler(BaseHTTPRequestHandler):
+    # --- AUTH ---
+    def check_auth(self):
+        auth_header = self.headers.get("Authorization")
+        if not auth_header or not auth_header.startswith("Basic "):
+            return False
+        encoded = auth_header.split(" ")[1]
+        decoded = base64.b64decode(encoded).decode("utf-8")
+        return decoded == "admin:password"
+
+    def require_auth(self):
+        self.send_response(401)
+        self.send_header("WWW-Authenticate", 'Basic realm="MoMo API"')
+        self.send_header("Content-Type", "application/json")
+        self.end_headers()
+        self.wfile.write(json.dumps({"error": "Unauthorized"}).encode())
+
+    # --- Helpers ---
     def _set_headers(self, status=200):
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.end_headers()
 
+    # --- Routes ---
     def do_GET(self):
+        if not self.check_auth():
+            return self.require_auth()
+
         parsed_path = urllib.parse.urlparse(self.path)
         parts = parsed_path.path.strip("/").split("/")
 
         if len(parts) == 1 and parts[0] == "transactions":
-            # List all
             self._set_headers(200)
             self.wfile.write(json.dumps(transactions, indent=2).encode())
 
         elif len(parts) == 2 and parts[0] == "transactions":
-            # Get one
             tx_id = parts[1]
             tx = get_transaction(tx_id)
             if tx:
@@ -62,12 +81,14 @@ class MoMoAPIHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"error": "Invalid endpoint"}).encode())
 
     def do_POST(self):
+        if not self.check_auth():
+            return self.require_auth()
+
         if self.path == "/transactions":
             content_length = int(self.headers.get("Content-Length", 0))
             body = self.rfile.read(content_length).decode()
             new_tx = json.loads(body)
 
-            # Give unique ID if not provided
             if not new_tx.get("transaction_id"):
                 new_tx["transaction_id"] = f"local-{len(transactions)+1}"
 
@@ -75,12 +96,17 @@ class MoMoAPIHandler(BaseHTTPRequestHandler):
             save_data(transactions)
 
             self._set_headers(201)
-            self.wfile.write(json.dumps({"message": "Transaction added", "transaction": new_tx}, indent=2).encode())
+            self.wfile.write(json.dumps(
+                {"message": "Transaction added", "transaction": new_tx}, indent=2
+            ).encode())
         else:
             self._set_headers(404)
             self.wfile.write(json.dumps({"error": "Invalid endpoint"}).encode())
 
     def do_PUT(self):
+        if not self.check_auth():
+            return self.require_auth()
+
         parts = self.path.strip("/").split("/")
         if len(parts) == 2 and parts[0] == "transactions":
             tx_id = parts[1]
@@ -98,12 +124,17 @@ class MoMoAPIHandler(BaseHTTPRequestHandler):
             save_data(transactions)
 
             self._set_headers(200)
-            self.wfile.write(json.dumps({"message": "Transaction updated", "transaction": tx}, indent=2).encode())
+            self.wfile.write(json.dumps(
+                {"message": "Transaction updated", "transaction": tx}, indent=2
+            ).encode())
         else:
             self._set_headers(404)
             self.wfile.write(json.dumps({"error": "Invalid endpoint"}).encode())
 
     def do_DELETE(self):
+        if not self.check_auth():
+            return self.require_auth()
+
         parts = self.path.strip("/").split("/")
         if len(parts) == 2 and parts[0] == "transactions":
             tx_id = parts[1]
